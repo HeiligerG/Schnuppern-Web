@@ -80,35 +80,35 @@ Die App ist so aufgebaut, dass die Lernenden zuerst Dinge direkt auf der Seite �
 
 ## Challenges im Detail
 
-### 1. Name anpassen
-- Ziel: Einen von drei neuen Profilnamen auswählen
-- Was verändern: Eine Option in der Challenge-Sektion anklicken
+### 1. Name im Code setzen
+- Ziel: Die richtige Code-Zeile finden, die den Namen ändert
+- Was verändern: Eine Code-Option im Challenge-Editor anklicken
 - Ergebnis: Der Name auf der Profilkarte verändert sich sofort
 
-### 2. Titel ändern
-- Ziel: Einen Titel aus drei Vorschlägen wählen
-- Was verändern: Einen passenden Titel in der Challenge-Karte anklicken
+### 2. Titel im Code setzen
+- Ziel: Die richtige Zeile auswählen, die den Titel setzt
+- Was verändern: Eine Code-Option in der Challenge-Karte anklicken
 - Ergebnis: Der Titel unter dem Namen ändert sich live
 
-### 3. Begrüssungstext verändern
-- Ziel: Einen Begrüssungsstil auswählen
-- Was verändern: Eine Text-Option in der Challenge-Sektion anklicken
+### 3. Begrüssungstext im Code setzen
+- Ziel: Die richtige Zeile auswählen, die den Begrüssungstext ändert
+- Was verändern: Eine Code-Option in der Challenge-Karte anklicken
 - Ergebnis: Der Begrüssungstext auf der Profilkarte wird angepasst
 
-### 4. Hobbys ergänzen
-- Ziel: Ein neues Hobby aus Vorschlägen wählen
-- Was verändern: Ein Hobby aus der Vorschlagsliste anklicken
+### 4. Hobby per Code hinzufügen
+- Ziel: Die richtige Zeile finden, die ein Hobby zur Liste hinzufügt
+- Was verändern: Eine Code-Option in der Challenge-Karte anklicken
 - Ergebnis: Die Hobbyliste erweitert sich sofort
 
-### 5. Akzentfarbe auswählen
-- Ziel: Eine andere Akzentfarbe wählen
-- Was verändern: Eine Farboption in der Challenge-Karte anklicken
+### 5. Accent-Farbe per Code ändern
+- Ziel: Die richtige Code-Zeile finden, die die Farbvariable setzt
+- Was verändern: Eine Code-Option in der Challenge-Karte anklicken
 - Ergebnis: Die Akzentfarbe der Seite wechselt sofort
 
-### 6. Button-Text ändern
-- Ziel: Einen neuen Button-Text und Fun Fact auswählen
-- Was verändern: Zwei Optionen in der Challenge-Karte anklicken
-- Ergebnis: Der Profilbutton und der Fun Fact werden sichtbar aktualisiert
+### 6. Profiltext per Code ändern
+- Ziel: Die richtige Zeile wählen, die Button-Text und Fun Fact setzt
+- Was verändern: Eine Code-Option in der Challenge-Karte anklicken
+- Ergebnis: Der Profilbutton und der Fun Fact werden direkt aktualisiert
 
 ### 7. Button-Hover verbessern (Code)
 - Ziel: Der Hauptbutton soll auf Hover lebendiger aussehen

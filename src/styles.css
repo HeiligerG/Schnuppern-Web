@@ -181,6 +181,18 @@ textarea {
 
 /* TODO: Button-Hover-Effekt im Code ergänzen */
 
+.code-snippet {
+  margin: 16px 0;
+  padding: 16px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.95);
+  color: #d8dee9;
+  overflow-x: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
 .fun-fact {
   padding: 18px;
   border-radius: 20px;

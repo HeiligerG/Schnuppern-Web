@@ -17,7 +17,7 @@
       <div class="hero-card">
         <strong>Deine Mission</strong>
         <p>
-          Löse die ersten Aufgaben direkt hier auf der Seite. Wähle aus mehreren Antworten und teste,
+          Löse die ersten Aufgaben direkt hier auf der Seite als kleine Code-Rätsel. Wähle die richtige Zeile und teste,
           wie sich das Profil verändert. Am Ende kannst du zwei Dinge direkt im Code verbessern.
         </p>
       </div>
@@ -54,8 +54,8 @@
       <section class="challenge-panel section-card">
         <h2>Deine Challenges</h2>
         <p class="panel-intro">
-          Diese Aufgaben sind jetzt deine Mission: Entscheide dich für Optionen und achte darauf,
-          wie dein Profil reagiert.
+          Diese Aufgaben sind kleine Coding-Rätsel: Wähle die richtige Code-Zeile aus und sieh,
+          wie dein Profil direkt auf die Lösung reagiert.
         </p>
 
         <div class="challenge-list">
@@ -65,60 +65,22 @@
               <span>{{ challengeStatus(challenge) }}</span>
             </div>
             <p>{{ challenge.description }}</p>
+            <pre class="code-snippet" v-if="challenge.snippet">{{ challenge.snippet }}</pre>
 
-            <div class="challenge-input" v-if="challenge.type === 'choices'">
+            <div class="challenge-input">
               <p class="small-label">{{ challenge.label }}</p>
               <div class="choice-buttons">
                 <button
                   v-for="option in challenge.options"
                   :key="option.label"
                   type="button"
-                  :class="['option-button', { active: isOptionActive(challenge, option) } ]"
-                  @click="applyOption(challenge, option)">
-                  {{ option.label }}
+                  :class="['option-button', { active: challenge.solved && option.correct } ]"
+                  @click="solveUiChallenge(challenge, option)">
+                  <code>{{ option.label }}</code>
                 </button>
               </div>
             </div>
-
-            <div class="challenge-input" v-if="challenge.type === 'hobby'">
-              <p class="small-label">{{ challenge.label }}</p>
-              <div class="choice-buttons">
-                <button
-                  v-for="option in challenge.options"
-                  :key="option.label"
-                  type="button"
-                  class="option-button"
-                  @click="addHobby(option.value)">
-                  {{ option.label }}
-                </button>
-              </div>
-            </div>
-
-            <div class="challenge-input" v-if="challenge.type === 'funfact'">
-              <p class="small-label">Button-Text auswählen</p>
-              <div class="choice-buttons">
-                <button
-                  v-for="option in challenge.buttonOptions"
-                  :key="option.label"
-                  type="button"
-                  :class="['option-button', { active: profile.buttonText === option.value } ]"
-                  @click="applyOption(challenge, option)">
-                  {{ option.label }}
-                </button>
-              </div>
-
-              <p class="small-label">Fun Fact auswählen</p>
-              <div class="choice-buttons">
-                <button
-                  v-for="option in challenge.funFactOptions"
-                  :key="option.label"
-                  type="button"
-                  :class="['option-button', { active: profile.funFact === option.value } ]"
-                  @click="applyOption(challenge, option)">
-                  {{ option.label }}
-                </button>
-              </div>
-            </div>
+            <p v-if="challenge.feedback" class="feedback">{{ challenge.feedback }}</p>
           </article>
         </div>
 
@@ -171,83 +133,86 @@ export default {
     const uiChallenges = [
       {
         id: 1,
-        title: 'Name anpassen',
-        description: 'Wähle einen neuen Profilnamen aus. Jeder Name verändert das Profil direkt.',
-        type: 'choices',
-        label: 'Name wechseln',
-        field: 'name',
+        title: 'Name im Code setzen',
+        description: 'Finde die richtige Code-Zeile, die den Namen auf der Profilkarte ändert.',
+        snippet: `// Setze den Namen im Profil\n// Wähle den richtigen Code`,
+        label: 'Richtige Code-Zeile',
+        solved: false,
+        feedback: '',
         options: [
-          { label: 'Lena', value: 'Lena' },
-          { label: 'Noah', value: 'Noah' },
-          { label: 'Mia', value: 'Mia' }
+          { label: "profile.name = 'Lena';", correct: true, result: { field: 'name', value: 'Lena' } },
+          { label: "profile.name == 'Lena';", correct: false },
+          { label: "profile.name === 'Lena';", correct: false }
         ]
       },
       {
         id: 2,
-        title: 'Titel ändern',
-        description: 'Wähle einen neuen Titel für dein Profil aus.',
-        type: 'choices',
-        label: 'Passender Titel',
-        field: 'title',
+        title: 'Titel im Code festlegen',
+        description: 'Wähle die richtige Zeile, die den Profil-Titel ändert.',
+        snippet: `// Setze den Titel im Profil\n// Wähle den richtigen Code`,
+        label: 'Richtige Code-Zeile',
+        solved: false,
+        feedback: '',
         options: [
-          { label: 'Web-Entdecker*in', value: 'Web-Entdecker*in' },
-          { label: 'App-Entdecker*in', value: 'App-Entdecker*in' },
-          { label: 'Code-Neugierige*r', value: 'Code-Neugierige*r' }
+          { label: "profile.title = 'Web-Entdecker*in';", correct: true, result: { field: 'title', value: 'Web-Entdecker*in' } },
+          { label: "profile.title == 'Web-Entdecker*in';", correct: false },
+          { label: "profile.title += 'Web-Entdecker*in';", correct: false }
         ]
       },
       {
         id: 3,
-        title: 'Gruss-Text wählen',
-        description: 'Wähle einen Begrüssungstext aus, der gut zu dir passt.',
-        type: 'choices',
-        label: 'Begrüssungsstil',
-        field: 'greeting',
+        title: 'Begrüssung per Code',
+        description: 'Wähle den richtigen Code, damit die Begrüssung in der App angezeigt wird.',
+        snippet: `// Ändere den Begrüssungstext\n// Wähle den richtigen Code`,
+        label: 'Richtige Code-Zeile',
+        solved: false,
+        feedback: '',
         options: [
-          { label: 'Hallo! Ich entdecke Web-Apps.', value: 'Hallo! Ich entdecke Web-Apps.' },
-          { label: 'Hi! Ich bin neugierig auf Apps.', value: 'Hi! Ich bin neugierig auf Apps.' },
-          { label: 'Guten Tag! Ich gestalte meine Seite.', value: 'Guten Tag! Ich gestalte meine Seite.' }
+          { label: "profile.greeting = 'Hi! Ich entdecke Web-Apps.';", correct: true, result: { field: 'greeting', value: 'Hi! Ich entdecke Web-Apps.' } },
+          { label: "profile.greeting += 'Hi! Ich entdecke Web-Apps.';", correct: false },
+          { label: "profile.greeting == 'Hi! Ich entdecke Web-Apps.';", correct: false }
         ]
       },
       {
         id: 4,
-        title: 'Hobby hinzufügen',
-        description: 'Füge ein Hobby aus der Vorschlagsliste hinzu.',
-        type: 'hobby',
-        label: 'Hobby wählen',
+        title: 'Hobby per Code hinzufügen',
+        description: 'Finde den korrekten Code, um ein Hobby zur Liste hinzuzufügen.',
+        snippet: `// Füge ein neues Hobby zur Liste hinzu\n// Wähle den richtigen Code`,
+        label: 'Richtige Code-Zeile',
+        solved: false,
+        feedback: '',
         options: [
-          { label: 'Lesen', value: 'Lesen' },
-          { label: 'Gamen', value: 'Gamen' },
-          { label: 'Fotografieren', value: 'Fotografieren' }
+          { label: "profile.hobbies.push('Gamen');", correct: true, result: { field: 'hobbies', value: 'Gamen' } },
+          { label: "profile.hobbies[0] = 'Gamen';", correct: false },
+          { label: "profile.hobbies.pop('Gamen');", correct: false }
         ]
       },
       {
         id: 5,
-        title: 'Akzentfarbe wählen',
-        description: 'Wähle eine neue Farbe für die Seite.',
-        type: 'choices',
-        label: 'Farbwelt',
-        field: 'accent',
+        title: 'Accent-Farbe per Code ändern',
+        description: 'Wähle die richtige Code-Zeile, die die Accent-Farbe der Seite setzt.',
+        snippet: `// Ändere die Farbe der Seite\n// Wähle den richtigen Code`,
+        label: 'Richtige Code-Zeile',
+        solved: false,
+        feedback: '',
         options: [
-          { label: 'Blau', value: '#5c7cfa' },
-          { label: 'Grün', value: '#37b24d' },
-          { label: 'Lila', value: '#845ef7' }
+          { label: "profile.accent = '#37b24d';", correct: true, result: { field: 'accent', value: '#37b24d' } },
+          { label: "profile.accent = 'grün';", correct: false },
+          { label: "setAccent('#37b24d');", correct: false }
         ]
       },
       {
         id: 6,
-        title: 'Button und Fun Fact',
-        description: 'Wähle einen neuen Button-Text und einen spannenden Fun Fact.',
-        type: 'funfact',
-        label: 'Profil lebendiger machen',
-        buttonOptions: [
-          { label: 'Mehr erfahren', value: 'Mehr erfahren' },
-          { label: 'Lass uns starten', value: 'Lass uns starten' },
-          { label: 'Profil ansehen', value: 'Profil ansehen' }
-        ],
-        funFactOptions: [
-          { label: 'Ich mag Code-Rätsel.', value: 'Ich mag Code-Rätsel.' },
-          { label: 'Ich entdecke gerne neue Apps.', value: 'Ich entdecke gerne neue Apps.' },
-          { label: 'Ich programmiere noch nicht, aber ich lerne.', value: 'Ich programmiere noch nicht, aber ich lerne.' }
+        title: 'Profiltext per Code',
+        description: 'Wähle die richtige Code-Zeile, die Button-Text und Fun Fact zusammen ändert.',
+        snippet: `// Ändere Text und Fun Fact\n// Wähle den richtigen Code`,
+        label: 'Richtige Code-Zeile',
+        solved: false,
+        feedback: '',
+        options: [
+          { label: "profile.buttonText = 'Mehr erfahren'; profile.funFact = 'Ich mag Code-Rätsel.';", correct: true, result: { field: 'both', values: { buttonText: 'Mehr erfahren', funFact: 'Ich mag Code-Rätsel.' } } },
+          { label: "profile.buttonText += 'Mehr erfahren';", correct: false },
+          { label: "profile.funFact == 'Ich mag Code-Rätsel.';", correct: false }
         ]
       }
     ]
@@ -327,23 +292,27 @@ export default {
       }
     }
 
-    const codeStatus = (challenge) => {
-      return challenge.solved ? 'Erledigt' : 'Offen'
-    }
-
-    const applyOption = (challenge, option) => {
-      if (challenge.field) {
-        profile[challenge.field] = option.value
-        if (challenge.field === 'accent') {
-          document.documentElement.style.setProperty('--accent', option.value)
-        }
+    const solveUiChallenge = (challenge, option) => {
+      if (!option.correct) {
+        challenge.feedback = 'Nicht ganz. Versuch es noch einmal.'
+        return
       }
-      if (challenge.type === 'funfact') {
-        if (challenge.buttonOptions.some((item) => item.value === option.value)) {
-          profile.buttonText = option.value
-        }
-        if (challenge.funFactOptions.some((item) => item.value === option.value)) {
-          profile.funFact = option.value
+
+      challenge.solved = true
+      challenge.feedback = 'Richtig! Der Code wurde übernommen.'
+
+      if (option.result) {
+        if (option.result.field === 'both') {
+          Object.assign(profile, option.result.values)
+        } else if (option.result.field === 'hobbies') {
+          if (!profile.hobbies.includes(option.result.value)) {
+            profile.hobbies.push(option.result.value)
+          }
+        } else {
+          profile[option.result.field] = option.result.value
+          if (option.result.field === 'accent') {
+            document.documentElement.style.setProperty('--accent', option.result.value)
+          }
         }
       }
     }
@@ -354,27 +323,8 @@ export default {
       }
     }
 
-    const isOptionActive = (challenge, option) => {
-      if (challenge.type === 'choices') {
-        return profile[challenge.field] === option.value
-      }
-      if (challenge.type === 'funfact') {
-        return profile.buttonText === option.value || profile.funFact === option.value
-      }
-      return false
-    }
-
     const challengeComplete = (challenge) => {
-      if (challenge.id === 1) return profile.name !== 'Alex'
-      if (challenge.id === 2) return profile.title !== 'Schnupperlernende/r Applikationsentwicklung'
-      if (challenge.id === 3) return profile.greeting !== 'Hi! Ich bin Alex und entdecke gerade die Welt der Web-Apps.'
-      if (challenge.id === 4) return profile.hobbies.length >= 4
-      if (challenge.id === 5) return profile.accent !== '#5c7cfa'
-      if (challenge.id === 6) return (
-        profile.buttonText !== 'Mehr über mich' ||
-        profile.funFact !== 'Ich finde es spannend, wie Webseiten auf Klick reagieren.'
-      )
-      return false
+      return challenge.solved === true
     }
 
     const challengeStatus = (challenge) => {
@@ -389,10 +339,7 @@ export default {
       profile,
       uiChallenges,
       codeChallenges,
-      applyOption,
       applyChallengeCode,
-      addHobby,
-      isOptionActive,
       challengeStatus,
       codeStatus,
       completedCount

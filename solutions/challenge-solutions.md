@@ -4,29 +4,29 @@ Dieses Dokument zeigt zu jeder Challenge eine einfache Lösung. Die Aufgaben sin
 
 ## UI-Challenges
 
-### 1. Name anpassen
+### 1. Name im Code setzen
 - Öffne die Seite im Browser.
-- In der Challenge-Sektion unter "Name anpassen" einen neuen Namen anklicken.
+- Wähle in der Code-Challenge den korrekten Code-Snippet aus, der `profile.name` setzt.
 - Ergebnis: Der Profilname oben links ändert sich sofort.
 
-### 2. Titel ändern
-- Wähle einen neuen Titel aus der Liste in der Challenge-Karte.
+### 2. Titel im Code setzen
+- Wähle in der Code-Challenge die richtige Code-Zeile, die `profile.title` setzt.
 - Ergebnis: Der Titel unter dem Namen aktualisiert sich live.
 
-### 3. Begrüssungstext verändern
-- Wähle einen Begrüssungstext aus den vorgeschlagenen Optionen.
-- Ergebnis: Der Text im Profil erscheint sofort angepasst.
+### 3. Begrüssungstext im Code setzen
+- Wähle in der Code-Challenge die richtige Zeile, die `profile.greeting` setzt.
+- Ergebnis: Der Begrüssungstext erscheint sofort angepasst.
 
-### 4. Hobbys ergänzen
-- Wähle eines der vorgeschlagenen Hobbys aus.
+### 4. Hobby per Code hinzufügen
+- Wähle in der Code-Challenge die richtige Code-Zeile, die ein Hobby zur Liste hinzufügt.
 - Ergebnis: Das Hobby erscheint in der Liste und erweitert das Profil.
 
-### 5. Akzentfarbe wählen
-- Klicke auf eine der Farboptionen: Blau, Grün oder Lila.
-- Ergebnis: Das Farbschema der Buttons und des Designs wechselt.
+### 5. Accent-Farbe per Code ändern
+- Wähle in der Code-Challenge die richtige Zeile, die `profile.accent` ändert.
+- Ergebnis: Die Akzentfarbe der Seite wechselt sofort.
 
-### 6. Button-Text ändern
-- Wähle einen neuen Button-Text und einen Fun Fact aus den Vorschlägen aus.
+### 6. Profiltext per Code ändern
+- Wähle in der Code-Challenge die richtige Zeile, die `profile.buttonText` und `profile.funFact` setzt.
 - Ergebnis: Der Profilbutton und der Fun Fact werden direkt aktualisiert.
 
 ## Code-Challenges
