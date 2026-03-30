@@ -6,29 +6,28 @@ Dieses Dokument zeigt zu jeder Challenge eine einfache Lösung. Die Aufgaben sin
 
 ### 1. Name anpassen
 - Öffne die Seite im Browser.
-- In der Challenge-Sektion unter "Name anpassen" einen eigenen Namen eingeben.
+- In der Challenge-Sektion unter "Name anpassen" einen neuen Namen anklicken.
 - Ergebnis: Der Profilname oben links ändert sich sofort.
 
 ### 2. Titel ändern
-- In die Zeile "Neuer Titel" einen persönlichen Titel schreiben.
+- Wähle einen neuen Titel aus der Liste in der Challenge-Karte.
 - Ergebnis: Der Titel unter dem Namen aktualisiert sich live.
 
 ### 3. Begrüssungstext verändern
-- In das Textfeld eine neue Begrüssung eingeben.
+- Wähle einen Begrüssungstext aus den vorgeschlagenen Optionen.
 - Ergebnis: Der Text im Profil erscheint sofort angepasst.
 
 ### 4. Hobbys ergänzen
-- In das Feld "Neues Hobby eingeben" einen Hobby-Namen schreiben.
-- Auf den Button "Hinzufügen" klicken.
-- Ergebnis: Das Hobby erscheint in der Liste.
+- Wähle eines der vorgeschlagenen Hobbys aus.
+- Ergebnis: Das Hobby erscheint in der Liste und erweitert das Profil.
 
 ### 5. Akzentfarbe wählen
-- Klicke auf eine der Farb-Kacheln: Blau, Grün oder Lila.
+- Klicke auf eine der Farboptionen: Blau, Grün oder Lila.
 - Ergebnis: Das Farbschema der Buttons und des Designs wechselt.
 
 ### 6. Button-Text ändern
-- In das Feld "Button-Text / Fun Fact" einen neuen Text eingeben.
-- Ergebnis: Der Button unter dem Profil zeigt den neuen Text.
+- Wähle einen neuen Button-Text und einen Fun Fact aus den Vorschlägen aus.
+- Ergebnis: Der Profilbutton und der Fun Fact werden direkt aktualisiert.
 
 ## Code-Challenges
 

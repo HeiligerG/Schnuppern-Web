@@ -17,8 +17,8 @@
       <div class="hero-card">
         <strong>Deine Mission</strong>
         <p>
-          Löse die ersten Tasks direkt in der Oberfläche. Dein Profil soll wachsen, schöner werden und am
-          Ende helfen dir zwei kleine Code-Aufgaben, noch mehr Glanz reinzubringen.
+          Löse die ersten Aufgaben direkt hier auf der Seite. Wähle aus mehreren Antworten und teste,
+          wie sich das Profil verändert. Am Ende kannst du zwei Dinge direkt im Code verbessern.
         </p>
       </div>
     </header>
@@ -26,7 +26,7 @@
     <section class="content-grid">
       <section class="profile-preview section-card">
         <div class="profile-top">
-          <div class="avatar">A</div>
+          <div class="avatar">{{ profile.name ? profile.name.charAt(0).toUpperCase() : 'A' }}</div>
           <div>
             <p class="small-label">Name</p>
             <h2>{{ profile.name }}</h2>
@@ -54,8 +54,8 @@
       <section class="challenge-panel section-card">
         <h2>Deine Challenges</h2>
         <p class="panel-intro">
-          Du arbeitest direkt hier in der Seite. Jede Aufgabe verändert dein Profil sofort.
-          Am Ende lernst du, wie du im Code selbst Verbesserungen machst.
+          Diese Aufgaben sind jetzt deine Mission: Entscheide dich für Optionen und achte darauf,
+          wie dein Profil reagiert.
         </p>
 
         <div class="challenge-list">
@@ -65,46 +65,57 @@
               <span>{{ challengeStatus(challenge) }}</span>
             </div>
             <p>{{ challenge.description }}</p>
-            <div class="challenge-input" v-if="challenge.type === 'text'">
-              <label>
-                {{ challenge.label }}
-                <input
-                  :value="challenge.value"
-                  @input="updateChallenge(challenge.id, $event.target.value)"
-                  type="text"
-                />
-              </label>
-            </div>
-            <div class="challenge-input" v-if="challenge.type === 'textarea'">
-              <label>
-                {{ challenge.label }}
-                <textarea
-                  :value="challenge.value"
-                  @input="updateChallenge(challenge.id, $event.target.value)"
-                  rows="3"
-                />
-              </label>
-            </div>
-            <div class="challenge-input" v-if="challenge.type === 'hobby'">
-              <label>
-                {{ challenge.label }}
-                <div class="hobby-row">
-                  <input v-model="newHobby" type="text" placeholder="Neues Hobby eingeben" />
-                  <button type="button" @click="addHobby">Hinzufügen</button>
-                </div>
-              </label>
-            </div>
-            <div class="challenge-input" v-if="challenge.type === 'color'">
-              <label>{{ challenge.label }}</label>
-              <div class="color-pills">
+
+            <div class="challenge-input" v-if="challenge.type === 'choices'">
+              <p class="small-label">{{ challenge.label }}</p>
+              <div class="choice-buttons">
                 <button
-                  v-for="scheme in colorOptions"
-                  :key="scheme.name"
+                  v-for="option in challenge.options"
+                  :key="option.label"
                   type="button"
-                  :class="['color-pill', { active: profile.accent === scheme.accent } ]"
-                  :style="{ background: scheme.accent }"
-                  @click="setAccent(scheme.accent)">
-                  {{ scheme.name }}
+                  :class="['option-button', { active: isOptionActive(challenge, option) } ]"
+                  @click="applyOption(challenge, option)">
+                  {{ option.label }}
+                </button>
+              </div>
+            </div>
+
+            <div class="challenge-input" v-if="challenge.type === 'hobby'">
+              <p class="small-label">{{ challenge.label }}</p>
+              <div class="choice-buttons">
+                <button
+                  v-for="option in challenge.options"
+                  :key="option.label"
+                  type="button"
+                  class="option-button"
+                  @click="addHobby(option.value)">
+                  {{ option.label }}
+                </button>
+              </div>
+            </div>
+
+            <div class="challenge-input" v-if="challenge.type === 'funfact'">
+              <p class="small-label">Button-Text auswählen</p>
+              <div class="choice-buttons">
+                <button
+                  v-for="option in challenge.buttonOptions"
+                  :key="option.label"
+                  type="button"
+                  :class="['option-button', { active: profile.buttonText === option.value } ]"
+                  @click="applyOption(challenge, option)">
+                  {{ option.label }}
+                </button>
+              </div>
+
+              <p class="small-label">Fun Fact auswählen</p>
+              <div class="choice-buttons">
+                <button
+                  v-for="option in challenge.funFactOptions"
+                  :key="option.label"
+                  type="button"
+                  :class="['option-button', { active: profile.funFact === option.value } ]"
+                  @click="applyOption(challenge, option)">
+                  {{ option.label }}
                 </button>
               </div>
             </div>
@@ -121,32 +132,33 @@
     <section class="code-challenge section-card">
       <h2>Code-Challenges</h2>
       <p>
-        Jetzt geht es in den Code. Zwei kleine Dateien brauchen deine Hilfe. Schau dir die Hinweise an
-        und öffne die Datei direkt im Editor.
+        Jetzt geht es in den Code. Zwei sichtbare Dinge sind noch nicht fertig: der Hauptbutton braucht
+        einen Hover-Effekt und das Layout darf etwas luftiger werden.
       </p>
       <div class="code-list">
         <article class="code-card">
           <h3>7. Button-Hover verbessern</h3>
           <p>
-            Der Button im Profil sieht noch nicht richtig interaktiv aus. Öffne <code>src/App.vue</code>
-            und ergänze einen Hover-Effekt für <code>.action-button</code>.
+            Öffne <code>src/styles.css</code> und ergänze einen Hover-Effekt für den Hauptbutton.
+            So fühlt sich die Seite lebendiger an.
           </p>
-          <p class="hint">Tipp: ein sanfter Schatten oder Farbwechsel reicht schon.</p>
+          <p class="hint">Tipp: Schatten, leichte Bewegung oder andere Farbakzente helfen.</p>
         </article>
         <article class="code-card">
-          <h3>8. Profilkarten-Abstand verbessern</h3>
+          <h3>8. Layout-Abstände verbessern</h3>
           <p>
-            Die Profilkarte und die Challenge-Box haben einen kleinen Abstandsfaktor, der noch nicht
-            gemütlich wirkt. Öffne <code>src/styles.css</code> oder <code>src/App.vue</code> und passe
-            den Innenabstand oder das Layout an.</p>
-          </article>
+            Öffne <code>src/styles.css</code> und mach die Karte oder die Abstände etwas angenehmer.
+            Das Profil und die Challenge-Box sollen nicht zu dicht aussehen.
+          </p>
+          <p class="hint">Tipp: Passe Padding, Gap oder Kartengrössen an.</p>
+        </article>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import { reactive, ref, computed } from 'vue'
+import { reactive, computed } from 'vue'
 
 export default {
   setup() {
@@ -160,101 +172,138 @@ export default {
       accent: '#5c7cfa'
     })
 
-    const colorOptions = [
-      { name: 'Blau', accent: '#5c7cfa' },
-      { name: 'Grün', accent: '#37b24d' },
-      { name: 'Lila', accent: '#845ef7' }
-    ]
-
     const uiChallenges = [
       {
         id: 1,
         title: 'Name anpassen',
-        description: 'Trage deinen eigenen Namen ein und sieh zu, wie die Karte lebendig wird.',
-        type: 'text',
-        label: 'Neuer Name',
-        value: profile.name
+        description: 'Wähle einen neuen Profilnamen aus. Jeder Name verändert das Profil direkt.',
+        type: 'choices',
+        label: 'Name wechseln',
+        field: 'name',
+        options: [
+          { label: 'Lena', value: 'Lena' },
+          { label: 'Noah', value: 'Noah' },
+          { label: 'Mia', value: 'Mia' }
+        ]
       },
       {
         id: 2,
         title: 'Titel ändern',
-        description: 'Gib einen eigenen Titel ein, der zeigt, was dich interessiert.',
-        type: 'text',
-        label: 'Neuer Titel',
-        value: profile.title
+        description: 'Wähle einen neuen Titel für dein Profil aus.',
+        type: 'choices',
+        label: 'Passender Titel',
+        field: 'title',
+        options: [
+          { label: 'Web-Entdecker*in', value: 'Web-Entdecker*in' },
+          { label: 'App-Entdecker*in', value: 'App-Entdecker*in' },
+          { label: 'Code-Neugierige*r', value: 'Code-Neugierige*r' }
+        ]
       },
       {
         id: 3,
-        title: 'Gruss-Text bearbeiten',
-        description: 'Schreibe eine freundliche Begrüssung, die deine Persönlichkeit zeigt.',
-        type: 'textarea',
-        label: 'Begrüssungstext',
-        value: profile.greeting
+        title: 'Gruss-Text wählen',
+        description: 'Wähle einen Begrüssungstext aus, der gut zu dir passt.',
+        type: 'choices',
+        label: 'Begrüssungsstil',
+        field: 'greeting',
+        options: [
+          { label: 'Hallo! Ich entdecke Web-Apps.', value: 'Hallo! Ich entdecke Web-Apps.' },
+          { label: 'Hi! Ich bin neugierig auf Apps.', value: 'Hi! Ich bin neugierig auf Apps.' },
+          { label: 'Guten Tag! Ich gestalte meine Seite.', value: 'Guten Tag! Ich gestalte meine Seite.' }
+        ]
       },
       {
         id: 4,
-        title: 'Hobbys ergänzen',
-        description: 'Füge ein neues Hobby hinzu und erweitere deine Profilseite.',
+        title: 'Hobby hinzufügen',
+        description: 'Füge ein Hobby aus der Vorschlagsliste hinzu.',
         type: 'hobby',
-        label: 'Neues Hobby',
-        value: ''
+        label: 'Hobby wählen',
+        options: [
+          { label: 'Lesen', value: 'Lesen' },
+          { label: 'Gamen', value: 'Gamen' },
+          { label: 'Fotografieren', value: 'Fotografieren' }
+        ]
       },
       {
         id: 5,
         title: 'Akzentfarbe wählen',
-        description: 'Wähle ein Farbschema, das zu deiner Seite passt.',
-        type: 'color',
-        label: 'Akzentfarbe',
-        value: profile.accent
+        description: 'Wähle eine neue Farbe für die Seite.',
+        type: 'choices',
+        label: 'Farbwelt',
+        field: 'accent',
+        options: [
+          { label: 'Blau', value: '#5c7cfa' },
+          { label: 'Grün', value: '#37b24d' },
+          { label: 'Lila', value: '#845ef7' }
+        ]
       },
       {
         id: 6,
-        title: 'Button-Text oder Fun Fact',
-        description: 'Mach den Profilbutton spannender oder ergänze einen persönlichen Fun Fact.',
-        type: 'text',
-        label: 'Button-Text / Fun Fact',
-        value: profile.buttonText
+        title: 'Button und Fun Fact',
+        description: 'Wähle einen neuen Button-Text und einen spannenden Fun Fact.',
+        type: 'funfact',
+        label: 'Profil lebendiger machen',
+        buttonOptions: [
+          { label: 'Mehr erfahren', value: 'Mehr erfahren' },
+          { label: 'Lass uns starten', value: 'Lass uns starten' },
+          { label: 'Profil ansehen', value: 'Profil ansehen' }
+        ],
+        funFactOptions: [
+          { label: 'Ich mag Code-Rätsel.', value: 'Ich mag Code-Rätsel.' },
+          { label: 'Ich entdecke gerne neue Apps.', value: 'Ich entdecke gerne neue Apps.' },
+          { label: 'Ich programmiere noch nicht, aber ich lerne.', value: 'Ich programmiere noch nicht, aber ich lerne.' }
+        ]
       }
     ]
 
-    const newHobby = ref('')
-
-    const updateChallenge = (id, value) => {
-      const challenge = uiChallenges.find((item) => item.id === id)
-      if (!challenge) return
-
-      if (id === 1) profile.name = value
-      if (id === 2) profile.title = value
-      if (id === 3) profile.greeting = value
-      if (id === 6) profile.buttonText = value
-      challenge.value = value
+    const applyOption = (challenge, option) => {
+      if (challenge.field) {
+        profile[challenge.field] = option.value
+        if (challenge.field === 'accent') {
+          document.documentElement.style.setProperty('--accent', option.value)
+        }
+      }
+      if (challenge.type === 'funfact') {
+        if (challenge.buttonOptions.some((item) => item.value === option.value)) {
+          profile.buttonText = option.value
+        }
+        if (challenge.funFactOptions.some((item) => item.value === option.value)) {
+          profile.funFact = option.value
+        }
+      }
     }
 
-    const addHobby = () => {
-      const hobby = newHobby.value.trim()
-      if (hobby && !profile.hobbies.includes(hobby)) {
+    const addHobby = (hobby) => {
+      if (!profile.hobbies.includes(hobby)) {
         profile.hobbies.push(hobby)
       }
-      newHobby.value = ''
     }
 
-    const setAccent = (accent) => {
-      profile.accent = accent
-      document.documentElement.style.setProperty('--accent', accent)
+    const isOptionActive = (challenge, option) => {
+      if (challenge.type === 'choices') {
+        return profile[challenge.field] === option.value
+      }
+      if (challenge.type === 'funfact') {
+        return profile.buttonText === option.value || profile.funFact === option.value
+      }
+      return false
     }
 
     const challengeComplete = (challenge) => {
-      if (challenge.id === 1) return profile.name.trim().length > 2
-      if (challenge.id === 2) return profile.title.trim().length > 5
-      if (challenge.id === 3) return profile.greeting.trim().length > 15
+      if (challenge.id === 1) return profile.name !== 'Alex'
+      if (challenge.id === 2) return profile.title !== 'Schnupperlernende/r Applikationsentwicklung'
+      if (challenge.id === 3) return profile.greeting !== 'Hi! Ich bin Alex und entdecke gerade die Welt der Web-Apps.'
       if (challenge.id === 4) return profile.hobbies.length >= 4
       if (challenge.id === 5) return profile.accent !== '#5c7cfa'
-      if (challenge.id === 6) return profile.buttonText.trim().length > 3 || profile.funFact.trim().length > 10
+      if (challenge.id === 6) return (
+        profile.buttonText !== 'Mehr über mich' ||
+        profile.funFact !== 'Ich finde es spannend, wie Webseiten auf Klick reagieren.'
+      )
       return false
     }
 
     const challengeStatus = (challenge) => {
-      return challengeComplete(challenge) ? 'Erledigt' : 'in Arbeit'
+      return challengeComplete(challenge) ? 'Erledigt' : 'Offen'
     }
 
     const completedCount = computed(() => {
@@ -264,13 +313,11 @@ export default {
     return {
       profile,
       uiChallenges,
-      colorOptions,
-      newHobby,
+      applyOption,
       addHobby,
-      setAccent,
-      updateChallenge,
-      completedCount,
-      challengeStatus
+      isOptionActive,
+      challengeStatus,
+      completedCount
     }
   }
 }

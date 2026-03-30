@@ -81,44 +81,44 @@ Die App ist so aufgebaut, dass die Lernenden zuerst Dinge direkt auf der Seite �
 ## Challenges im Detail
 
 ### 1. Name anpassen
-- Ziel: Den Namen auf der Profilkarte ändern
-- Was verändern: Das Eingabefeld im Bereich "Deine Challenges"
-- Ergebnis: Name wird sofort sichtbar aktualisiert
+- Ziel: Einen von drei neuen Profilnamen auswählen
+- Was verändern: Eine Option in der Challenge-Sektion anklicken
+- Ergebnis: Der Name auf der Profilkarte verändert sich sofort
 
 ### 2. Titel ändern
-- Ziel: Einen persönlichen Titel eintragen
-- Was verändern: Titelfeld in der Challenge-Sektion
-- Ergebnis: Titel auf der Profilkarte ändert sich live
+- Ziel: Einen Titel aus drei Vorschlägen wählen
+- Was verändern: Einen passenden Titel in der Challenge-Karte anklicken
+- Ergebnis: Der Titel unter dem Namen ändert sich live
 
 ### 3. Begrüssungstext verändern
-- Ziel: Persönliche Begrüssung schreiben
-- Was verändern: Textarea in der Challenge-Sektion
-- Ergebnis: Begrüssung auf der Profilkarte wird aktualisiert
+- Ziel: Einen Begrüssungsstil auswählen
+- Was verändern: Eine Text-Option in der Challenge-Sektion anklicken
+- Ergebnis: Der Begrüssungstext auf der Profilkarte wird angepasst
 
 ### 4. Hobbys ergänzen
-- Ziel: Mindestens ein weiteres Hobby hinzufügen
-- Was verändern: Neues Hobby eingeben und auf "Hinzufügen" klicken
-- Ergebnis: Hobbyliste wächst und ist sofort sichtbar
+- Ziel: Ein neues Hobby aus Vorschlägen wählen
+- Was verändern: Ein Hobby aus der Vorschlagsliste anklicken
+- Ergebnis: Die Hobbyliste erweitert sich sofort
 
 ### 5. Akzentfarbe auswählen
 - Ziel: Eine andere Akzentfarbe wählen
-- Was verändern: Farb-Kachel anklicken
-- Ergebnis: Akzentfarbe der Website verändert sich
+- Was verändern: Eine Farboption in der Challenge-Karte anklicken
+- Ergebnis: Die Akzentfarbe der Seite wechselt sofort
 
 ### 6. Button-Text ändern
-- Ziel: Den Text des Profilbuttons persönlicher machen
-- Was verändern: Button-Text im Challenge-Formular eingeben
-- Ergebnis: Der Button-Text auf der Profilkarte aktualisiert sich
+- Ziel: Einen neuen Button-Text und Fun Fact auswählen
+- Was verändern: Zwei Optionen in der Challenge-Karte anklicken
+- Ergebnis: Der Profilbutton und der Fun Fact werden sichtbar aktualisiert
 
 ### 7. Button-Hover verbessern (Code)
-- Ziel: Der Button soll interaktiver aussehen
-- Was verändern: `src/App.vue` oder `src/styles.css`
+- Ziel: Der Hauptbutton soll auf Hover lebendiger aussehen
+- Was verändern: `src/styles.css`
 - Hinweis: Ergänze einen Hover-Effekt für `.action-button`
 
 ### 8. Layout verbessern (Code)
-- Ziel: Die Profilkarten sollen noch gemütlicher wirken
-- Was verändern: `src/styles.css` oder `src/App.vue`
-- Hinweis: Passe Abstände oder Kartendetails an
+- Ziel: Das Layout der Karten und Abstände noch gemütlicher machen
+- Was verändern: `src/styles.css`
+- Hinweis: Passe `padding`, `gap` oder Kartengrössen an
 
 ## Tipps für Betreuende
 
