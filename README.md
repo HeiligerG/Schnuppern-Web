@@ -112,19 +112,19 @@ Die App ist so aufgebaut, dass die Lernenden zuerst Dinge direkt auf der Seite �
 
 ### 7. Button-Hover verbessern (Code)
 - Ziel: Der Hauptbutton soll auf Hover lebendiger aussehen
-- Was verändern: `src/styles.css`
-- Hinweis: Ergänze einen Hover-Effekt für `.action-button`
+- Was verändern: Nutze den eingebauten Editor unter "Code-Challenges"
+- Hinweis: Ergänze eine Regel für `.action-button:hover`
 
 ### 8. Layout verbessern (Code)
 - Ziel: Das Layout der Karten und Abstände noch gemütlicher machen
-- Was verändern: `src/styles.css`
-- Hinweis: Passe `padding`, `gap` oder Kartengrössen an
+- Was verändern: Nutze den eingebauten Editor unter "Code-Challenges"
+- Hinweis: Ergänze `padding`, `gap` oder `box-shadow` für `.section-card`
 
 ## Tipps für Betreuende
 
 - Zeige zuerst den Bereich "Deine Challenges" und erkläre: "Du kannst hier alles direkt ändern."
 - Lass die Lernenden eigene Namen, Titel und Hobbys ausprobieren.
-- Für die Code-Challenges halte die Datei `src/App.vue` bereit.
+- Die Code-Challenges werden direkt im virtuellen Editor der Website gelöst.
 - Ermutige: Kleine Änderungen führen zu sofort sichtbaren Ergebnissen.
 
 ## Ideen für Erweiterungen

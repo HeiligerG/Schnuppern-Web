@@ -132,25 +132,21 @@
     <section class="code-challenge section-card">
       <h2>Code-Challenges</h2>
       <p>
-        Jetzt geht es in den Code. Zwei sichtbare Dinge sind noch nicht fertig: der Hauptbutton braucht
-        einen Hover-Effekt und das Layout darf etwas luftiger werden.
+        Jetzt löst du zwei Coding-Aufgaben direkt im virtuellen Editor. Schreibe oder ergänze den Code und klicke auf "Teste Code".
       </p>
       <div class="code-list">
-        <article class="code-card">
-          <h3>7. Button-Hover verbessern</h3>
-          <p>
-            Öffne <code>src/styles.css</code> und ergänze einen Hover-Effekt für den Hauptbutton.
-            So fühlt sich die Seite lebendiger an.
-          </p>
-          <p class="hint">Tipp: Schatten, leichte Bewegung oder andere Farbakzente helfen.</p>
-        </article>
-        <article class="code-card">
-          <h3>8. Layout-Abstände verbessern</h3>
-          <p>
-            Öffne <code>src/styles.css</code> und mach die Karte oder die Abstände etwas angenehmer.
-            Das Profil und die Challenge-Box sollen nicht zu dicht aussehen.
-          </p>
-          <p class="hint">Tipp: Passe Padding, Gap oder Kartengrössen an.</p>
+        <article class="code-card" v-for="challenge in codeChallenges" :key="challenge.id">
+          <div class="challenge-header">
+            <strong>{{ challenge.id }}. {{ challenge.title }}</strong>
+            <span>{{ codeStatus(challenge) }}</span>
+          </div>
+          <p>{{ challenge.description }}</p>
+          <textarea class="code-editor" v-model="challenge.code" rows="10"></textarea>
+          <div class="editor-actions">
+            <button type="button" @click="applyChallengeCode(challenge)">Teste Code</button>
+            <span class="hint">{{ challenge.hint }}</span>
+          </div>
+          <p v-if="challenge.feedback" class="feedback">{{ challenge.feedback }}</p>
         </article>
       </div>
     </section>
@@ -158,7 +154,7 @@
 </template>
 
 <script>
-import { reactive, computed } from 'vue'
+import { reactive, computed, ref, watch } from 'vue'
 
 export default {
   setup() {
@@ -256,6 +252,85 @@ export default {
       }
     ]
 
+    const dynamicCss = ref('')
+    const codeChallenges = reactive([
+      {
+        id: 7,
+        title: 'Button-Hover verbessern',
+        description: 'Bearbeite den CSS-Code im Editor und ergänze einen Hover-Effekt für den Button.',
+        starterCode: `.action-button {
+  width: fit-content;
+  padding: 14px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: white;
+  cursor: pointer;
+}
+
+/* TODO: Ergänze hier den Hover-Effekt für den Button */`,
+        code: '',
+        solved: false,
+        feedback: '',
+        hint: 'Tipp: Schreibe eine Regel für .action-button:hover und nutze z. B. box-shadow oder background.'
+      },
+      {
+        id: 8,
+        title: 'Layout-Abstände verbessern',
+        description: 'Verbessere den Code, damit die Karten mehr Platz und eine freundlichere Optik bekommen.',
+        starterCode: `.section-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* TODO: Mache die Karten noch gemütlicher mit mehr Abstand oder Schatten */`,
+        code: '',
+        solved: false,
+        feedback: '',
+        hint: 'Tipp: Ergänze padding, gap oder box-shadow, damit die Karten leicht und aufgeräumt wirken.'
+      }
+    ])
+
+    codeChallenges.forEach((item) => {
+      item.code = item.starterCode
+    })
+
+    const styleElement = document.getElementById('challenge-dynamic-style') || document.head.appendChild(document.createElement('style'))
+    styleElement.id = 'challenge-dynamic-style'
+
+    watch(dynamicCss, (value) => {
+      styleElement.textContent = value
+    })
+
+    const applyChallengeCode = (challenge) => {
+      dynamicCss.value = challenge.code
+      if (challenge.id === 7) {
+        const hoverPresent = /\.action-button\s*:\s*hover/.test(challenge.code)
+        const effectPresent = /box-shadow|background|transform/.test(challenge.code)
+        challenge.solved = hoverPresent && effectPresent
+        challenge.feedback = challenge.solved
+          ? 'Gut gemacht! Der Hover-Effekt ist jetzt in deinem Code.'
+          : 'Der Hover-Effekt fehlt noch. Ergänze .action-button:hover und einen Stil.'
+      }
+      if (challenge.id === 8) {
+        const sectionCardUpdated = /\.section-card/.test(challenge.code)
+        const spacingAdded = /padding|gap|box-shadow/.test(challenge.code)
+        challenge.solved = sectionCardUpdated && spacingAdded
+        challenge.feedback = challenge.solved
+          ? 'Super! Die Layout-Regel ist angepasst.'
+          : 'Noch nicht ganz. Ergänze padding, gap oder box-shadow für .section-card.'
+      }
+    }
+
+    const codeStatus = (challenge) => {
+      return challenge.solved ? 'Erledigt' : 'Offen'
+    }
+
     const applyOption = (challenge, option) => {
       if (challenge.field) {
         profile[challenge.field] = option.value
@@ -313,10 +388,13 @@ export default {
     return {
       profile,
       uiChallenges,
+      codeChallenges,
       applyOption,
+      applyChallengeCode,
       addHobby,
       isOptionActive,
       challengeStatus,
+      codeStatus,
       completedCount
     }
   }

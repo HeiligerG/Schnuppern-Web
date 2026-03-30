@@ -32,9 +32,9 @@ Dieses Dokument zeigt zu jeder Challenge eine einfache Lösung. Die Aufgaben sin
 ## Code-Challenges
 
 ### 7. Button-Hover verbessern
-- Datei: `src/styles.css`
-- Suche die Regel für `.action-button`.
-- Ergänze einen Hover-Zustand mit einem sanften Schatten oder Farbwechsel.
+- Aufgabe: Nutze den eingebauten Code-Editor auf der Website.
+- Suche im Editor die Stelle mit `/* TODO: Ergänze hier den Hover-Effekt für den Button */`.
+- Ergänze eine Hover-Regel für `.action-button:hover`.
 
 Beispiel:
 
@@ -45,12 +45,12 @@ Beispiel:
 }
 ```
 
-Das macht den Button fühlbar interaktiver.
+Das macht den Button spürbar interaktiver.
 
 ### 8. Layout / Abstände verbessern
-- Datei: `src/styles.css`
-- Suche die allgemeine Kartengestaltung oder die `.section-card`-Regel.
-- Erhöhe den `padding`-Wert oder passe `gap` an, damit die Karte gemütlicher wirkt.
+- Aufgabe: Nutze den eingebauten Code-Editor auf der Website.
+- Suche im Editor die Stelle mit `/* TODO: Mache die Karten noch gemütlicher mit mehr Abstand oder Schatten */`.
+- Ergänze `padding`, `gap` oder `box-shadow` für `.section-card`, damit das Layout gemütlicher wirkt.
 
 Beispiel:
 
@@ -58,14 +58,7 @@ Beispiel:
 .section-card {
   padding: 28px;
   gap: 24px;
-}
-```
-
-Oder ergänze:
-
-```css
-.profile-top {
-  gap: 20px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
 }
 ```
 
